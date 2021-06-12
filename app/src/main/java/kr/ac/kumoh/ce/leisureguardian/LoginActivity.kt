@@ -51,7 +51,9 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("test-Response", responseData.toString())
 
                         if(responseData?.access_token != null) {
+                            val token = responseData.access_token.toString()
                             val intent = Intent(this@LoginActivity, TabActivity::class.java)
+                            intent.putExtra("token", token)
                             startActivity(intent)
                         }
                         else {
