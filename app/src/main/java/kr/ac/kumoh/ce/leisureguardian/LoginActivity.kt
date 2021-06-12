@@ -29,26 +29,26 @@ class LoginActivity : AppCompatActivity() {
         loginbutton.setOnClickListener{
             //loginbutton.isClickable = false   // 클릭 불가 상태
             val loginData = LoginData(useremail.text.toString(), password.text.toString())
-            Log.d("username", loginData.email)
-            Log.d("password", loginData.password)
+            Log.d("test-username", loginData.email)
+            Log.d("test-password", loginData.password)
 
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
             addConverterFactory(GsonConverterFactory.create()).build()
 
             val service = retrofit.create(RetrofitAPI::class.java)    // RestrofitAPI 사용
-            Log.d("Restrofit","시작")
+            Log.d("test-Restrofit","시작")
             val request: Call<ResponseData> = service.loginPost(loginData)    // 로그인 확인
             request.enqueue(object: Callback<ResponseData> {
                 override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                     if(!response.isSuccessful) { // 로그인 실패시
-                        Log.d("Login Fail", response.toString())
+                        Log.d("test-Login Fail", response.toString())
                         Toast.makeText(this@LoginActivity, response.toString(), Toast.LENGTH_SHORT).show()
                         loginbutton.isClickable = true    // 로그인 버튼 클릭가능
                     }
                     else {
-                        Log.d("Response", response.toString())
+                        Log.d("test-Response", response.toString())
                         val responseData = response.body()  // 로그인 토큰 받음
-                        Log.d("Response", responseData.toString())
+                        Log.d("test-Response", responseData.toString())
 
                         if(responseData?.access_token != null) {
                             val intent = Intent(this@LoginActivity, TabActivity::class.java)
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                    Log.d("call",t.toString())
+                    Log.d("test-call",t.toString())
                     Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요", Toast.LENGTH_SHORT).show()
                     loginbutton.isClickable = true    // 로그인 버튼 클릭가능
                 }
