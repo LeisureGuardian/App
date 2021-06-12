@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
         val signupbutton = findViewById<Button>(R.id.signupbutton)
 
         loginbutton.setOnClickListener{
-            //loginbutton.isClickable = false   // 클릭 불가 상태
             val loginData = LoginData(useremail.text.toString(), password.text.toString())
             Log.d("test-username", loginData.email)
             Log.d("test-password", loginData.password)
@@ -51,9 +50,8 @@ class LoginActivity : AppCompatActivity() {
                         Log.d("test-Response", responseData.toString())
 
                         if(responseData?.access_token != null) {
-                            val token = responseData.access_token.toString()
                             val intent = Intent(this@LoginActivity, TabActivity::class.java)
-                            intent.putExtra("token", token)
+                            Singleton.getInstance(this@LoginActivity).login_token = responseData.access_token
                             startActivity(intent)
                         }
                         else {

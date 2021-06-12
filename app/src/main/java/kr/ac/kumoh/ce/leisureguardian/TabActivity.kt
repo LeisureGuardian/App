@@ -1,7 +1,6 @@
 package kr.ac.kumoh.ce.leisureguardian
 
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -14,8 +13,6 @@ class TabActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab)
-        val token = intent.getStringExtra("token")
-        Log.d("test-Tabtoken", token.toString())
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
