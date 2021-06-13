@@ -1,6 +1,7 @@
 package kr.ac.kumoh.s20160250.lg
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -47,7 +48,9 @@ class SignupActivity : AppCompatActivity() {
                             if(responseData!=null)
                             {
                                 Toast.makeText(this@SignupActivity,"계정이 성공적으로 등록됨",Toast.LENGTH_SHORT).show()
-                                finish()
+                                var intent=Intent(this@SignupActivity,LoginActivity::class.java) //로그인 화면으로 이동
+                                startActivity(intent)
+
                             }
                             else
                             {
@@ -58,7 +61,7 @@ class SignupActivity : AppCompatActivity() {
                     else
                     {
                         Log.d("fail",response.toString())
-                        Log.d("response",response.body().toString())
+                        Log.d("response",response.body().toString()) //에러 정보 확인
                         Toast.makeText(this@SignupActivity,"입력된 정보를 확인하시오",Toast.LENGTH_SHORT).show()
                     }
 

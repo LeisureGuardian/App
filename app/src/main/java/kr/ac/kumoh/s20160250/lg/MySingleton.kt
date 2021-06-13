@@ -11,6 +11,8 @@ class MySingleton private constructor(context: Context){
                     INSTANCE =it
                 }
             }
+
     }
     lateinit var login_token : String
+
 }
