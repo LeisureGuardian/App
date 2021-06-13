@@ -14,6 +14,10 @@ interface RetrofitAPI {
 //        @Header("x-access-token") token: String?
 //    ): Call<ResponseData<ArrayList<DeviceData>>>
 //
+    @POST("/device")
+    fun add_device(
+    @Header("Authorization") token: String?,
+    @Body deviceInfo: DeviceInfo) :Call<ResponseData>
     @GET("/device")
     fun statusGet(
         @Header("Authorization") token: String?): Call<DeviceData<ArrayList<Device>>>

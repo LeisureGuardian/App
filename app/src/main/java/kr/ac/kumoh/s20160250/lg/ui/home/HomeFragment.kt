@@ -36,9 +36,7 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
 
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
         addConverterFactory(GsonConverterFactory.create()).build()
         val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
@@ -49,6 +47,9 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<DeviceData<ArrayList<Device>>>, response: Response<DeviceData<ArrayList<Device>>>) {
                 Log.d("response",response.toString())
                 Log.d("response.body",response.body().toString())
+                homeViewModel.text.observe(viewLifecycleOwner, Observer {
+                    textView.text = response.body().toString()
+                })
             }
 
             override fun onFailure(call: Call<DeviceData<ArrayList<Device>>>, t: Throwable) {

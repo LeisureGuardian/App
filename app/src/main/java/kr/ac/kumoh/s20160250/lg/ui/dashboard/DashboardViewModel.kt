@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class DashboardViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "장치 등록"
+        value = "장치등록이 필요합니다.\n"
     }
     val text: LiveData<String> = _text
 }
