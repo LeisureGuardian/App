@@ -2,7 +2,7 @@ package kr.ac.kumoh.ce.leisureguardian.data
 
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 interface RetrofitAPI {
     @POST("/user/login")
@@ -14,11 +14,9 @@ interface RetrofitAPI {
 //        @Header("x-access-token") token: String?
 //    ): Call<ResponseData<ArrayList<DeviceData>>>
 //
-//    @GET("/device")
-//    suspend fun statusGet(
-//        @Path("devicename") devicename: String?,
-//        @Header("x-access-token") token: String?
-//    ): Call<ResponseData<ArrayList<StatusData>>>
+    @GET("/device")
+    fun statusGet(
+        @Header("Authorization") token: String?): Call<DeviceData<ArrayList<Device>>>
 
     @POST("/user/signup")
     fun signupPost(@Body signUpData: SignUpData): Call<ResponseData>

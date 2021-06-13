@@ -34,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
             addConverterFactory(GsonConverterFactory.create()).build()
 
-            val service = retrofit.create(RetrofitAPI::class.java)    // RestrofitAPI 사용
-            Log.d("test-Restrofit","시작")
+            val service = retrofit.create(RetrofitAPI::class.java)    // RetrofitAPI 사용
+            Log.d("test-Retrofit","시작")
             val request: Call<ResponseData> = service.loginPost(loginData)    // 로그인 확인
             request.enqueue(object: Callback<ResponseData> {
                 override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
@@ -60,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
                     Log.d("test-call", t.toString())
                     Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요", Toast.LENGTH_SHORT).show()
@@ -70,8 +69,7 @@ class LoginActivity : AppCompatActivity() {
         }
         signupbutton.setOnClickListener{
             signupbutton.isClickable = false
-            val intent = Intent(this,
-                SignupActivity::class.java)
+            val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
             signupbutton.isClickable = true
         }
