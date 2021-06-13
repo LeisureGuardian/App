@@ -24,9 +24,11 @@ class MapFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val kumoh = LatLng(36.08, 128.23)
+        val kumoh = LatLng(36.1455, 128.3925)
         googleMap.addMarker(MarkerOptions().position(kumoh).title("Marker in Kumoh University"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(kumoh))
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
+        googleMap.uiSettings.isZoomControlsEnabled = true
     }
 
     private lateinit var mapViewModel: MapViewModel

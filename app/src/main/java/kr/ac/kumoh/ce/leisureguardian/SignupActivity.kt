@@ -29,7 +29,7 @@ class SignupActivity : AppCompatActivity() {
 
         signupbutton2.setOnClickListener {
             var signupdata = SignUpData(organization.text.toString(), newName.text.toString(), newEmail.text.toString(), newPassword.text.toString())
-            Log.d("test-check",signupdata.toString())
+            Log.d("test-signup data",signupdata.toString())
 
             val retrofit = Retrofit.Builder()
                     .baseUrl("http://mmyu.synology.me:8000")
@@ -44,7 +44,7 @@ class SignupActivity : AppCompatActivity() {
                         response: Response<ResponseData>
                 ) {
                     if(response.isSuccessful) {
-                        Log.d("test-response data", response.toString())
+                        Log.d("test-response", response.toString())
                         val responseData = response.body()
                         Log.d("test-response data", responseData.toString())
 

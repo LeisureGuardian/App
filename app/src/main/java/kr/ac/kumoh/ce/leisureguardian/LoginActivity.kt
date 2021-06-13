@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                    Log.d("test-call",t.toString())
+                    Log.d("test-call", t.toString())
                     Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요", Toast.LENGTH_SHORT).show()
                     loginbutton.isClickable = true    // 로그인 버튼 클릭가능
                 }

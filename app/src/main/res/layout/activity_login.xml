@@ -20,7 +20,6 @@
             android:id="@+id/alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" "
             android:textSize="20dp"
             android:textColor="#000000"
             android:textAlignment="center"
@@ -31,7 +30,6 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textSize="20dp"
-            android:text=" "
             android:gravity="center_horizontal" />
 
         <TextView
@@ -49,9 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:layout_margin="50px"
-            android:hint="계정이메일"/>
+            android:hint="계정 이메일"/>
 
         <EditText
             android:id="@+id/password"
