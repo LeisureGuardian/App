@@ -41,31 +41,31 @@ class DashboardFragment : Fragment() {
             textView.text = it
         })
 
-        add_device.setOnClickListener {
-            Log.d("button","버튼눌림")
-//            Toast.makeText(requireContext(), "추가됨", Toast.LENGTH_SHORT).show()
-//            val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
-//            addConverterFactory(GsonConverterFactory.create()).build()
-//            val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
-//
-//            var deviceinfo=DeviceInfo(deviceSerial.text.toString(),deviceName.text.toString())
-//            var token = MySingleton.getInstance(requireContext()).login_token
-//            val request: Call<ResponseData> = service.add_device("Bearer "+"${token}",deviceinfo)//로그인 확인
-//            request.enqueue(object : Callback<ResponseData> {
-//                override fun onResponse(
-//                    call: Call<ResponseData>,
-//                    response: Response<ResponseData>
-//                ) {
-//                    Log.d("response",response.toString())
-//                    Log.d("response",response.body().toString())
-//                    Toast.makeText(requireContext(), "장치가성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-//                    Toast.makeText(requireContext(), "장치등록실패", Toast.LENGTH_SHORT).show()
-//                }
-//            })
-        }
+//        add_device.setOnClickListener {
+//            Log.d("button","버튼눌림")
+////            Toast.makeText(requireContext(), "추가됨", Toast.LENGTH_SHORT).show()
+////            val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
+////            addConverterFactory(GsonConverterFactory.create()).build()
+////            val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
+////
+////            var deviceinfo=DeviceInfo(deviceSerial.text.toString(),deviceName.text.toString())
+////            var token = MySingleton.getInstance(requireContext()).login_token
+////            val request: Call<ResponseData> = service.add_device("Bearer "+"${token}",deviceinfo)//로그인 확인
+////            request.enqueue(object : Callback<ResponseData> {
+////                override fun onResponse(
+////                    call: Call<ResponseData>,
+////                    response: Response<ResponseData>
+////                ) {
+////                    Log.d("response",response.toString())
+////                    Log.d("response",response.body().toString())
+////                    Toast.makeText(requireContext(), "장치가성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show()
+////                }
+////
+////                override fun onFailure(call: Call<ResponseData>, t: Throwable) {
+////                    Toast.makeText(requireContext(), "장치등록실패", Toast.LENGTH_SHORT).show()
+////                }
+////            })
+//        }
 
         return root
     }
