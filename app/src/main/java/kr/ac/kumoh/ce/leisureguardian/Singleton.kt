@@ -12,5 +12,5 @@ class Singleton private constructor(context: Context) {
                 }
             }
     }
-    lateinit var loginToken: String
+    var loginToken: String? = null
 }

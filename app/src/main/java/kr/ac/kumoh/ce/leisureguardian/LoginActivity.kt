@@ -45,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
                         loginbutton.isClickable = true    // 로그인 버튼 클릭가능
                     }
                     else {
-                        Log.d("test-Response", response.toString())
+                        Log.d("test-Login response", response.toString())
                         val responseData = response.body()  // 로그인 토큰 받음
-                        Log.d("test-Response", responseData.toString())
+                        Log.d("test-Login token", responseData.toString())
 
                         if(responseData?.access_token != null) {
                             val intent = Intent(this@LoginActivity, TabActivity::class.java)
@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                    Log.d("test-call", t.toString())
+                    Log.d("test-Login error", t.toString())
                     Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요", Toast.LENGTH_SHORT).show()
                     loginbutton.isClickable = true    // 로그인 버튼 클릭가능
                 }

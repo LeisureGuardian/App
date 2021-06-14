@@ -28,44 +28,43 @@ class SignupActivity : AppCompatActivity() {
         val newPassword = findViewById<EditText>(R.id.newPassword)
 
         signupbutton2.setOnClickListener {
-            var signupdata = SignUpData(
+            val signupdata = SignUpData(
                 organization.text.toString(),
                 newName.text.toString(),
                 newEmail.text.toString(),
                 newPassword.text.toString()
             )
-            Log.d("test-signup data", signupdata.toString())
+            Log.d("test-Signup data", signupdata.toString())
 
             val retrofit = Retrofit.Builder()
-                    .baseUrl("http://mmyu.synology.me:8000")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
+                .baseUrl("http://mmyu.synology.me:8000")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
             val service: RetrofitAPI = retrofit.create(RetrofitAPI::class.java)
 
             val request: Call<ResponseData> = service.signupPost(signupdata)
-            request.enqueue(object : Callback<ResponseData>{
+            request.enqueue(object : Callback<ResponseData> {
                 override fun onResponse(
                         call: Call<ResponseData>,
                         response: Response<ResponseData>
                 ) {
                     if(response.isSuccessful) {
-                        Log.d("test-response", response.toString())
+                        Log.d("test-Signup response", response.toString())
                         val responseData = response.body()
-                        Log.d("test-response data", responseData.toString())
+                        Log.d("test-Signup data", responseData.toString())
 
                         if(responseData != null) {
                             Toast.makeText(this@SignupActivity, "계정이 성공적으로 등록됨", Toast.LENGTH_SHORT).show()
-                            finish()
+                            val intent = Intent(this@SignupActivity, LoginActivity::class.java)
+                            startActivity(intent)
                         }
                         else {
                             Toast.makeText(this@SignupActivity, "계정 등록 실패", Toast.LENGTH_SHORT).show()
                         }
-                        val intent = Intent(this@SignupActivity, LoginActivity::class.java)
-                        startActivity(intent)
                     }
                     else {
-                        Log.d("test-fail", response.toString())
-                        Log.d("test-response", response.body().toString())
+                        Log.d("test-Signup fail", response.toString())
+                        Log.d("test-Signup response", response.body().toString())
                         Toast.makeText(this@SignupActivity,"입력된 정보를 확인하세요", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -73,8 +72,8 @@ class SignupActivity : AppCompatActivity() {
                     call: Call<ResponseData>,
                     t: Throwable
                 ) {
-                    Log.d("test-signup error", t.toString())
-                    Toast.makeText(this@SignupActivity,"rest 요청 실패", Toast.LENGTH_SHORT).show()
+                    Log.d("test-Signup error", t.toString())
+                    Toast.makeText(this@SignupActivity,"REST 요청 실패", Toast.LENGTH_SHORT).show()
                 }
             })
         }

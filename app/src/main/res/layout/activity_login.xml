@@ -39,8 +39,8 @@
             android:layout_margin="50px"
             android:textAlignment="center"
             android:gravity="center_horizontal"
-            android:textSize="20dp"
-            android:text="안녕하세요.\n로그인이 필요합니다 "  />
+            android:textSize="30sp"
+            android:text="Welcome"  />
 
         <EditText
             android:id="@+id/useremail"

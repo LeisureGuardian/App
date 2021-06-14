@@ -1,15 +1,13 @@
 package kr.ac.kumoh.ce.leisureguardian.data
 
 data class StatusData(
-    private var _id: String,
-    var updatedAt: String,
-    var createdAt: String,
-    var devicename: String,
-    var emergency: String,
-    var degreeX: String,
-    var degreeY: String,
-    var degreeZ: String,
+    var deviceSerial : String,
     var longitude: String,
     var latitude: String,
-    var __v: String
+    var temp: String,
+    var accelMax: String,
+    var heartRate: String,
+    var batteryLevel: String,
+    var critical: String,
+    var button: String
 )
