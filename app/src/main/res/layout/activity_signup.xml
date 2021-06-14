@@ -60,7 +60,7 @@
             android:orientation="horizontal"
             android:layout_margin="50px">
             <Button
-                android:id="@+id/signupbutton2"
+                android:id="@+id/signupButton2"
                 android:layout_margin="25px"
                 android:layout_weight="1"
                 android:layout_width="match_parent"

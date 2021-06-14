@@ -21,13 +21,13 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val loginbutton = findViewById<Button>(R.id.loginbutton)
+        val loginButton = findViewById<Button>(R.id.loginbutton)
         val password = findViewById<EditText>(R.id.password)
-        val useremail = findViewById<EditText>(R.id.useremail)
-        val signupbutton = findViewById<Button>(R.id.signupbutton)
+        val userEmail = findViewById<EditText>(R.id.useremail)
+        val signupButton = findViewById<Button>(R.id.signupbutton)
 
-        loginbutton.setOnClickListener{
-            val loginData = LoginData(useremail.text.toString(), password.text.toString())
+        loginButton.setOnClickListener{
+            val loginData = LoginData(userEmail.text.toString(), password.text.toString())
             Log.d("test-username", loginData.email)
             Log.d("test-password", loginData.password)
 
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
                     if(!response.isSuccessful) { // 로그인 실패시
                         Log.d("test-Login Fail", response.toString())
                         Toast.makeText(this@LoginActivity, response.toString(), Toast.LENGTH_SHORT).show()
-                        loginbutton.isClickable = true    // 로그인 버튼 클릭가능
+                        loginButton.isClickable = true    // 로그인 버튼 클릭가능
                     }
                     else {
                         Log.d("test-Login response", response.toString())
@@ -51,27 +51,27 @@ class LoginActivity : AppCompatActivity() {
 
                         if(responseData?.access_token != null) {
                             val intent = Intent(this@LoginActivity, TabActivity::class.java)
-                            Singleton.getInstance(this@LoginActivity).loginToken = responseData.access_token
+                            Singleton.getInstance().loginToken = responseData.access_token
                             startActivity(intent)
                         }
                         else {
                             Toast.makeText(this@LoginActivity,"로그인 실패", Toast.LENGTH_SHORT).show()
-                            loginbutton.isClickable = true // 로그인 버튼 클릭가능
+                            loginButton.isClickable = true // 로그인 버튼 클릭가능
                         }
                     }
                 }
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
                     Log.d("test-Login error", t.toString())
                     Toast.makeText(this@LoginActivity, "계정과 비밀번호를 입력하세요", Toast.LENGTH_SHORT).show()
-                    loginbutton.isClickable = true    // 로그인 버튼 클릭가능
+                    loginButton.isClickable = true    // 로그인 버튼 클릭가능
                 }
             })
         }
-        signupbutton.setOnClickListener{
-            signupbutton.isClickable = false
+        signupButton.setOnClickListener{
+            signupButton.isClickable = false
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
-            signupbutton.isClickable = true
+            signupButton.isClickable = true
         }
     }
 }

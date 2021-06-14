@@ -15,13 +15,13 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kr.ac.kumoh.ce.leisureguardian.R
 
 class MapFragment : Fragment() {
-    private val KUMOH = LatLng(36.1455, 128.3925)
-    private val SBMI = LatLng(36.1359, 128.3956)
-    private val SG204 = LatLng(36.1395, 128.3961)
+    private val kumoh = LatLng(36.1455, 128.3925)
+    private val sbmi = LatLng(36.1359, 128.3956)
+    private val sg204 = LatLng(36.1395, 128.3961)
 
     private lateinit var markerKumoh: Marker
-    private lateinit var markerSbmi: Marker
-    private lateinit var markerSg204: Marker
+    private lateinit var markerSBMI: Marker
+    private lateinit var markerSG204: Marker
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -35,27 +35,27 @@ class MapFragment : Fragment() {
          */
         markerKumoh = googleMap.addMarker(
             MarkerOptions()
-                .position(KUMOH)
+                .position(kumoh)
                 .title("Kumoh University")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         )
         markerKumoh.tag = 0
-        markerSbmi = googleMap.addMarker(
+        markerSBMI = googleMap.addMarker(
             MarkerOptions()
-                .position(SBMI)
+                .position(sbmi)
                 .title("SBMI")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         )
-        markerSbmi.tag = 0
-        markerSg204 = googleMap.addMarker(
+        markerSBMI.tag = 0
+        markerSG204 = googleMap.addMarker(
             MarkerOptions()
-                .position(SG204)
+                .position(sg204)
                 .title("SG204")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         )
-        markerSg204.tag = 0
+        markerSG204.tag = 0
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(KUMOH))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(kumoh))
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isMapToolbarEnabled = false

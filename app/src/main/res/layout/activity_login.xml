@@ -81,14 +81,6 @@
                 android:layout_height="wrap_content"
                 android:text="로그인"/>
         </LinearLayout>
-        <TextView
-            android:layout_margin="50px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" \n "
-            android:textAlignment="center"
-            android:textSize="10pt"
-            android:gravity="center_horizontal" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

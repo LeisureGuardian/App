@@ -1,13 +1,11 @@
 package kr.ac.kumoh.ce.leisureguardian
 
-import android.content.Context
-
-class Singleton private constructor(context: Context) {
+class Singleton private constructor() {
     companion object {
         private var INSTANCE: Singleton ?= null
-        fun getInstance(context: Context) =
+        fun getInstance() =
             INSTANCE?: synchronized(this) {
-                INSTANCE?: Singleton(context).also {
+                INSTANCE?: Singleton().also {
                     INSTANCE = it
                 }
             }

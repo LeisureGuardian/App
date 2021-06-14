@@ -41,9 +41,9 @@ class HomeFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create()).build()
         val service = retrofit.create(RetrofitAPI::class.java)  // RetrofitAPI 사용
 
-        var token = Singleton.getInstance(requireContext()).loginToken
+        val token = Singleton.getInstance().loginToken
         Log.d("test-Home token", token.toString())
-        val request: Call<DeviceData<ArrayList<Device>>> = service.statusGet("Bearer "+"$token")
+        val request: Call<DeviceData<ArrayList<Device>>> = service.statusGet("Bearer $token")
         Log.d("test-Home request", request.toString())
         request.enqueue(object: Callback<DeviceData<ArrayList<Device>>> {
 

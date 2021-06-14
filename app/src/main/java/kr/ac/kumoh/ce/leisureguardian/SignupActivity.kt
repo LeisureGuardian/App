@@ -21,20 +21,20 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        val signupbutton2 = findViewById<Button>(R.id.signupbutton2)
+        val signupButton2 = findViewById<Button>(R.id.signupButton2)
         val organization = findViewById<EditText>(R.id.organization)
         val newEmail = findViewById<EditText>(R.id.newEmail)
         val newName = findViewById<EditText>(R.id.newName)
         val newPassword = findViewById<EditText>(R.id.newPassword)
 
-        signupbutton2.setOnClickListener {
-            val signupdata = SignUpData(
+        signupButton2.setOnClickListener {
+            val signupData = SignUpData(
                 organization.text.toString(),
                 newName.text.toString(),
                 newEmail.text.toString(),
                 newPassword.text.toString()
             )
-            Log.d("test-Signup data", signupdata.toString())
+            Log.d("test-Signup data", signupData.toString())
 
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://mmyu.synology.me:8000")
@@ -42,7 +42,7 @@ class SignupActivity : AppCompatActivity() {
                 .build()
             val service: RetrofitAPI = retrofit.create(RetrofitAPI::class.java)
 
-            val request: Call<ResponseData> = service.signupPost(signupdata)
+            val request: Call<ResponseData> = service.signupPost(signupData)
             request.enqueue(object : Callback<ResponseData> {
                 override fun onResponse(
                         call: Call<ResponseData>,
