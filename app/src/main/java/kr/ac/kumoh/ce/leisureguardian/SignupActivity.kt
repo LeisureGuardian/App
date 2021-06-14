@@ -28,8 +28,13 @@ class SignupActivity : AppCompatActivity() {
         val newPassword = findViewById<EditText>(R.id.newPassword)
 
         signupbutton2.setOnClickListener {
-            var signupdata = SignUpData(organization.text.toString(), newName.text.toString(), newEmail.text.toString(), newPassword.text.toString())
-            Log.d("test-signup data",signupdata.toString())
+            var signupdata = SignUpData(
+                organization.text.toString(),
+                newName.text.toString(),
+                newEmail.text.toString(),
+                newPassword.text.toString()
+            )
+            Log.d("test-signup data", signupdata.toString())
 
             val retrofit = Retrofit.Builder()
                     .baseUrl("http://mmyu.synology.me:8000")
@@ -68,7 +73,7 @@ class SignupActivity : AppCompatActivity() {
                     call: Call<ResponseData>,
                     t: Throwable
                 ) {
-                    Log.d("test-sign error", t.toString())
+                    Log.d("test-signup error", t.toString())
                     Toast.makeText(this@SignupActivity,"rest 요청 실패", Toast.LENGTH_SHORT).show()
                 }
             })
