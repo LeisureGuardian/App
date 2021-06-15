@@ -41,14 +41,14 @@
             android:textAlignment="center"
             android:gravity="center_horizontal"
             android:textSize="20dp"
-            android:text="장치등록이 필요합니다.\n"  />
+            android:text="장치등록 및 삭제.\n"  />
 
         <EditText
             android:id="@+id/deviceSerial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             android:layout_margin="50px"
             android:hint="장치 번호"/>
 
@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPassword"
+            android:inputType="textPersonName"
             android:layout_margin="50px"
             android:hint="장치 이름"/>
 
@@ -75,6 +75,15 @@
                 android:background="#7DE8DB"
                 android:padding="10dp"
                 android:text="추가" />
+            <Button
+                android:id="@+id/delete_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_weight="1"
+                android:background="#7DE8DB"
+                android:padding="10dp"
+                android:text="삭제" />
         </LinearLayout>
         <TextView
             android:layout_margin="50px"

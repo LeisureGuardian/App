@@ -25,31 +25,32 @@ import retrofit2.converter.gson.GsonConverterFactory
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    var token :String?=null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+//        homeViewModel =
+//            ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
 
 
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
         addConverterFactory(GsonConverterFactory.create()).build()
-        val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
+        val service = retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
 
-        var token =MySingleton.getInstance(requireContext()).login_token
+        var token = MySingleton.getInstance(requireContext()).login_token
         val request: Call<DeviceData<ArrayList<Device>>> = service.statusGet("Bearer "+"${token}")
         request.enqueue(object :Callback<DeviceData<ArrayList<Device>>>{
             override fun onResponse(call: Call<DeviceData<ArrayList<Device>>>, response: Response<DeviceData<ArrayList<Device>>>) {
                 Log.d("response",response.toString())
                 Log.d("response.body",response.body().toString())
-                homeViewModel.text.observe(viewLifecycleOwner, Observer {
-                    textView.text = response.body().toString()
-                })
+//                homeViewModel.text.observe(viewLifecycleOwner, Observer {
+//                    textView.text = response.body().toString()
+//                })
+                textView.text = response.body().toString()
             }
 
             override fun onFailure(call: Call<DeviceData<ArrayList<Device>>>, t: Throwable) {

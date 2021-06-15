@@ -1,6 +1,5 @@
 package kr.ac.kumoh.s20160250.lg.data
 
-import android.widget.Button
 
 data class StatusData (
     var deviceSerial : String,

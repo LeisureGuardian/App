@@ -8,16 +8,22 @@ interface RetrofitAPI {
     @POST("/user/login")
     fun loginPost(@Body logindata: LoginData): Call<ResponseData>
 
-//    @GET("/devicedata")
-//    suspend fun deviceGet(
-//        @Path("owner") owner: String?,
-//        @Header("x-access-token") token: String?
-//    ): Call<ResponseData<ArrayList<DeviceData>>>
-//
+    @GET("/devicedata")
+    fun deviceGet(
+        @Header("Authorization") token: String?
+    ): Call<DeviceData<ArrayList<StatusData>>>
+
+    @DELETE("/device/{id}")
+    fun delete_device(
+        @Path("id") deviceSerial :String?,
+        @Header("Authorization") token: String?
+    ) :Call<ResponseDevice>
+
     @POST("/device")
     fun add_device(
     @Header("Authorization") token: String?,
-    @Body deviceInfo: DeviceInfo) :Call<ResponseData>
+    @Body deviceInfo: DeviceInfo) : Call<ResponseData>
+
     @GET("/device")
     fun statusGet(
         @Header("Authorization") token: String?): Call<DeviceData<ArrayList<Device>>>
