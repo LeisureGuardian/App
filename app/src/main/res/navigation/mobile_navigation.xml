@@ -9,17 +9,27 @@
         android:id="@+id/navigation_home"
         android:name="kr.ac.kumoh.ce.leisureguardian.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="kr.ac.kumoh.ce.leisureguardian.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_maps"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_map"
         android:name="kr.ac.kumoh.ce.leisureguardian.ui.map.MapFragment"
         android:label="@string/title_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_navigation_maps_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

@@ -33,9 +33,9 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val textView: TextView = root.findViewById(R.id.text_home)
 
-        homeViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
-        })
+//        homeViewModel.text.observe(viewLifecycleOwner, {
+//            textView.text = it
+//        })
 
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000")
             .addConverterFactory(GsonConverterFactory.create()).build()
@@ -44,12 +44,11 @@ class HomeFragment : Fragment() {
         val token = Singleton.getInstance().loginToken
         Log.d("test-Home token", token.toString())
         val request: Call<DeviceData<ArrayList<Device>>> = service.statusGet("Bearer $token")
-        Log.d("test-Home request", request.toString())
         request.enqueue(object: Callback<DeviceData<ArrayList<Device>>> {
-
             override fun onResponse(call: Call<DeviceData<ArrayList<Device>>>, response: Response<DeviceData<ArrayList<Device>>>) {
                 Log.d("test-Home response", response.toString())
                 Log.d("test-Home response body", response.body().toString())
+                textView.text = response.body().toString()
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<Device>>>, t: Throwable) {
                 Log.d("test-Home error", t.toString())
