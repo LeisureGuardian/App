@@ -1,7 +1,7 @@
 package kr.ac.kumoh.ce.leisureguardian.data
 
 data class StatusData(
-    var deviceSerial : String,
+    var deviceName : String,
     var longitude: String,
     var latitude: String,
     var temp: String,

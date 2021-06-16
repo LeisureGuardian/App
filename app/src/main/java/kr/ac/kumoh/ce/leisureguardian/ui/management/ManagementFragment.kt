@@ -36,28 +36,23 @@ class ManagementFragment : Fragment() {
         val deviceName: EditText = root.findViewById(R.id.deviceName)
 
         addDevice.setOnClickListener {
-            Log.d("test-Dash add", "등록 버튼 클릭")
+            Log.d("test-Device add", "등록 버튼 클릭")
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             val service = retrofit.create(RetrofitAPI::class.java)  // RetrofitAPI 사용
 
             val deviceInfo = DeviceInfo(deviceSerial.text.toString(), deviceName.text.toString())
-            Log.d("test-Dash deviceInfo", deviceInfo.toString())
+            Log.d("test-Device deviceInfo", deviceInfo.toString())
             val token = Singleton.getInstance().loginToken
-            val request: Call<ResponseData> = service.add_device("Bearer $token", deviceInfo)  // 로그인 확인
+            val request: Call<ResponseData> = service.add_device("Bearer $token", deviceInfo)
             request.enqueue(object: Callback<ResponseData> {
                 override fun onResponse(
                     call: Call<ResponseData>,
                     response: Response<ResponseData>
                 ) {
-                    Log.d("test-Dash response", response.toString())
-                    Log.d("test-Dash response body", response.body().toString())
-                    if(response.body().toString() != null) {
-                        Toast.makeText(requireContext(), "장치가 성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show()
-                    }
-                    else {
-                        Toast.makeText(requireContext(), "장치가 등록되지않았습니다", Toast.LENGTH_SHORT).show()
-                    }
+                    Log.d("test-Device response", response.toString())
+                    Log.d("test-Device body", response.body().toString())
+                    Toast.makeText(requireContext(), "장치가 성공적으로 등록되었습니다", Toast.LENGTH_SHORT).show()
                 }
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
                     Toast.makeText(requireContext(), "장치 등록 실패", Toast.LENGTH_SHORT).show()
@@ -65,7 +60,7 @@ class ManagementFragment : Fragment() {
             })
         }
         deleteDevice.setOnClickListener {
-            Log.d("test-Dash delete","삭제 버튼 눌림")
+            Log.d("test-Device delete","삭제 버튼 눌림")
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             val service = retrofit.create(RetrofitAPI::class.java)  // RetrofitAPI 사용
@@ -76,8 +71,8 @@ class ManagementFragment : Fragment() {
                     call: Call<ResponseDevice>,
                     response: Response<ResponseDevice>
                 ) {
-                    Log.d("test-Dash response", response.toString())
-                    Log.d("test-Dash response body", response.body().toString())
+                    Log.d("test-Device response", response.toString())
+                    Log.d("test-Device body", response.body().toString())
                     Toast.makeText(requireContext(), "장치가 성공적으로 삭제되었습니다", Toast.LENGTH_SHORT).show()
                 }
                 override fun onFailure(call: Call<ResponseDevice>, t: Throwable) {

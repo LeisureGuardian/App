@@ -1,54 +1,72 @@
 package kr.ac.kumoh.ce.leisureguardian.ui.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.ac.kumoh.ce.leisureguardian.R
-import kr.ac.kumoh.ce.leisureguardian.RecyclerAdapterDevices
-import kr.ac.kumoh.ce.leisureguardian.Singleton
-import kr.ac.kumoh.ce.leisureguardian.data.Device
-import kr.ac.kumoh.ce.leisureguardian.data.DeviceData
-import kr.ac.kumoh.ce.leisureguardian.data.RetrofitAPI
-import kr.ac.kumoh.ce.leisureguardian.data.StatusData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class ListFragment : Fragment() {
+
+    private lateinit var listViewModel: ListViewModel
+    private val mAdapter = RecyclerAdapterDevices()
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        listViewModel = ViewModelProvider(activity as AppCompatActivity).get(ListViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_list, container, false)
         val recyclerView = root.findViewById<RecyclerView>(R.id.rvDevices)
-        val list = ArrayList<StatusData>()
-        val adapter = RecyclerAdapterDevices(list)
-        recyclerView.adapter = adapter
-
-        val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val service = retrofit.create(RetrofitAPI::class.java)  // RetrofitAPI 사용
-
-        val token = Singleton.getInstance().loginToken
-        Log.d("test-Home token", token.toString())
-        val request: Call<DeviceData<ArrayList<Device>>> = service.statusGet("Bearer $token")
-        request.enqueue(object: Callback<DeviceData<ArrayList<Device>>> {
-            override fun onResponse(call: Call<DeviceData<ArrayList<Device>>>, response: Response<DeviceData<ArrayList<Device>>>) {
-                Log.d("test-Home response", response.toString())
-                Log.d("test-Home response body", response.body().toString())
-            }
-            override fun onFailure(call: Call<DeviceData<ArrayList<Device>>>, t: Throwable) {
-                Log.d("test-Home error", t.toString())
-            }
-        })
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            adapter = mAdapter
+        }
         return root
+    }
+
+    inner class RecyclerAdapterDevices : RecyclerView.Adapter<RecyclerAdapterDevices.ViewHolder>() {
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val deviceImage: ImageView = itemView.findViewById(R.id.deviceImage)
+            val deviceName: TextView = itemView.findViewById(R.id.deviceName)
+            val critical: TextView = itemView.findViewById(R.id.critical)
+            val batteryLevel: TextView = itemView.findViewById(R.id.batteryLevel)
+            val temp: TextView = itemView.findViewById(R.id.temp)
+            val accelMax: TextView = itemView.findViewById(R.id.accelMax)
+            val heartRate: TextView = itemView.findViewById(R.id.heartRate)
+        }
+        override fun getItemCount(): Int = listViewModel.getSize()
+
+        override fun onBindViewHolder(holder: RecyclerAdapterDevices.ViewHolder, position: Int) {
+            if(listViewModel.getStatus(position).critical == "0") {
+                holder.deviceImage.setImageResource(R.drawable.device_green)
+            }
+            else {
+                holder.deviceImage.setImageResource(R.drawable.device_red)
+            }
+            holder.deviceName.text = listViewModel.getStatus(position).deviceName
+            holder.critical.text = listViewModel.getStatus(position).critical
+            holder.batteryLevel.text = listViewModel.getStatus(position).batteryLevel + "%"
+            holder.temp.text = "체온: " + listViewModel.getStatus(position).temp + "℃"
+            holder.accelMax.text = "가속도: " + listViewModel.getStatus(position).accelMax
+            holder.heartRate.text = "심박수: " + listViewModel.getStatus(position).heartRate
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
+                RecyclerAdapterDevices.ViewHolder {
+            val view = layoutInflater.inflate(R.layout.list_devices, parent, false)
+            return ViewHolder(view)
+        }
     }
 }

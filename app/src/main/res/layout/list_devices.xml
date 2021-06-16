@@ -15,10 +15,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
         <TextView
-            android:id="@+id/deviceSerial"
+            android:id="@+id/deviceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="number"
+            android:text="name"
             android:textSize="12sp" />
         <TextView
             android:id="@+id/critical"
