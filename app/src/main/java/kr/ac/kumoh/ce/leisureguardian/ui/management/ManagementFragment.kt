@@ -1,4 +1,4 @@
-package kr.ac.kumoh.ce.leisureguardian.ui.dashboard
+package kr.ac.kumoh.ce.leisureguardian.ui.management
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import kr.ac.kumoh.ce.leisureguardian.R
 import kr.ac.kumoh.ce.leisureguardian.Singleton
 import kr.ac.kumoh.ce.leisureguardian.data.DeviceInfo
@@ -22,7 +21,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DashboardFragment : Fragment() {
+class ManagementFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +29,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val root = inflater.inflate(R.layout.fragment_management, container, false)
         val addDevice: Button = root.findViewById(R.id.add_device)
         val deleteDevice: Button = root.findViewById(R.id.delete_device)
         val deviceSerial: EditText = root.findViewById(R.id.deviceSerial)
