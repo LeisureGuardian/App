@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/deviceimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/devicename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="장치 1번"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="36.5도"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/accelerate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가속도"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/heartrate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="심박수"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/batterylevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100%"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

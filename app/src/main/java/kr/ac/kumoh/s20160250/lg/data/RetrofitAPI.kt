@@ -27,6 +27,10 @@ interface RetrofitAPI {
     @GET("/device")
     fun statusGet(
         @Header("Authorization") token: String?): Call<DeviceData<ArrayList<Device>>>
+    @GET("/deviceData")
+    fun statusListGet(
+        @Header("Authorization") token: String?): Call<DeviceData<ArrayList<StatusData>>>
+
 
     @POST("/user/signup")
     fun signupPost(@Body signUpData: SignUpData): Call<ResponseData>
