@@ -1,5 +1,6 @@
 package kr.ac.kumoh.ce.leisureguardian.ui.list
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +41,6 @@ class ListFragment : Fragment() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val deviceImage: ImageView = itemView.findViewById(R.id.deviceImage)
             val deviceName: TextView = itemView.findViewById(R.id.deviceName)
-            val critical: TextView = itemView.findViewById(R.id.critical)
             val batteryLevel: TextView = itemView.findViewById(R.id.batteryLevel)
             val temp: TextView = itemView.findViewById(R.id.temp)
             val accelMax: TextView = itemView.findViewById(R.id.accelMax)
@@ -53,11 +53,11 @@ class ListFragment : Fragment() {
                 holder.deviceImage.setImageResource(R.drawable.device_green)
             }
             else {
+                holder.deviceName.setTextColor(Color.parseColor("#ff0000"))
                 holder.deviceImage.setImageResource(R.drawable.device_red)
             }
             holder.deviceName.text = listViewModel.getStatus(position).deviceName
-            holder.critical.text = listViewModel.getStatus(position).critical
-            holder.batteryLevel.text = listViewModel.getStatus(position).batteryLevel + "%"
+            holder.batteryLevel.text = "배터리: " + listViewModel.getStatus(position).batteryLevel + "%"
             holder.temp.text = "체온: " + listViewModel.getStatus(position).temp + "℃"
             holder.accelMax.text = "가속도: " + listViewModel.getStatus(position).accelMax
             holder.heartRate.text = "심박수: " + listViewModel.getStatus(position).heartRate

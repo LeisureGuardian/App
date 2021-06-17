@@ -1,4 +1,4 @@
-package kr.ac.kumoh.ce.leisureguardian.ui.list
+package kr.ac.kumoh.ce.leisureguardian.ui.map
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ListViewModel : ViewModel() {
+class MapViewModel : ViewModel() {
     val list = MutableLiveData<ArrayList<StatusData>>()
     var statusData = ArrayList<StatusData>()
     private val token: String?
@@ -32,12 +32,12 @@ class ListViewModel : ViewModel() {
         val request: Call<DeviceData<ArrayList<StatusData>>> = service.statusListGet("Bearer $token")
         request.enqueue(object :Callback<DeviceData<ArrayList<StatusData>>> {
             override fun onResponse(call: Call<DeviceData<ArrayList<StatusData>>>, response: Response<DeviceData<ArrayList<StatusData>>>) {
-                Log.d("test-List response", response.toString())
-                Log.d("test-List body", response.body().toString())
+                Log.d("test-Map response", response.toString())
+                Log.d("test-Map body", response.body().toString())
                 statusData.clear()
                 statusData = response.body()?.data?: ArrayList()
                 list.value = statusData
-                Log.d("test-List", list.value.toString())
+                Log.d("test-Map", list.value.toString())
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<StatusData>>>, t: Throwable) {
                 Log.d("test-error", t.toString())
