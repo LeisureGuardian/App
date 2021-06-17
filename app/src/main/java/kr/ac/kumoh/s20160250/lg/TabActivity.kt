@@ -1,15 +1,12 @@
 package kr.ac.kumoh.s20160250.lg
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import kr.ac.kumoh.s20160250.lg.ui.home.HomeFragment
 
 class TabActivity : AppCompatActivity() {
 

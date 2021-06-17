@@ -9,13 +9,11 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kr.ac.kumoh.s20160250.lg.data.LoginData
 import kr.ac.kumoh.s20160250.lg.data.ResponseData
 import kr.ac.kumoh.s20160250.lg.data.RetrofitAPI
-import kr.ac.kumoh.s20160250.lg.ui.home.HomeFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.NullPointerException
 
 class LoginActivity : AppCompatActivity()  {
     companion object{
@@ -56,7 +54,7 @@ class LoginActivity : AppCompatActivity()  {
 
                         if(responseData?.access_token!=null){
                             val intent= Intent(this@LoginActivity,TabActivity::class.java)
-                                MySingleton.getInstance(this@LoginActivity).login_token=responseData.access_token
+                                MySingleton.getInstance().login_token=responseData.access_token
                                 startActivity(intent)
                             }
                         else{

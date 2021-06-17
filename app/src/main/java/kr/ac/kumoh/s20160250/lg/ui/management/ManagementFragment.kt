@@ -1,4 +1,4 @@
-package kr.ac.kumoh.s20160250.lg.ui.dashboard
+package kr.ac.kumoh.s20160250.lg.ui.management
 
 import android.os.Bundle
 import android.util.Log
@@ -6,13 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_dashboard.view.*
+import kotlinx.android.synthetic.main.fragment_management.*
+import kotlinx.android.synthetic.main.fragment_management.view.*
 import kr.ac.kumoh.s20160250.lg.MySingleton
 import kr.ac.kumoh.s20160250.lg.R
 import kr.ac.kumoh.s20160250.lg.data.DeviceInfo
@@ -26,7 +23,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class DashboardFragment : Fragment() {
+class ManagementFragment : Fragment() {
 
 
     private lateinit var add_device : Button
@@ -36,8 +33,8 @@ class DashboardFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-//        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val view: View = inflater!!.inflate(R.layout.fragment_dashboard, container, false)
+//        val root = inflater.inflate(R.layout.fragment_management, container, false)
+        val view: View = inflater!!.inflate(R.layout.fragment_management, container, false)
 //        val textView: TextView = root.findViewById(R.id.text2)
 //        val add : Button = root.findViewById(R.id.add_device)
 //        val delete : Button = root.findViewById(R.id.delete_device)
@@ -46,12 +43,12 @@ class DashboardFragment : Fragment() {
 
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
             addConverterFactory(GsonConverterFactory.create()).build()
-            val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
+            val service=retrofit.create(RetrofitAPI::class.java) //retrofit api 사용
 
             var deviceinfo=DeviceInfo(deviceSerial.text.toString(),deviceName.text.toString())
             Log.d("deviceinfo",deviceinfo.toString())
-            var token = MySingleton.getInstance(requireContext()).login_token
-            val request: Call<ResponseData> = service.add_device("Bearer "+"${token}",deviceinfo)//로그인 확인
+            var token = MySingleton.getInstance().login_token
+            val request: Call<ResponseData> = service.add_device("Bearer "+"${token}",deviceinfo)
             request.enqueue(object : Callback<ResponseData> {
                 override fun onResponse(
                     call: Call<ResponseData>,
@@ -78,7 +75,7 @@ class DashboardFragment : Fragment() {
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
             addConverterFactory(GsonConverterFactory.create()).build()
             val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
-            var token = MySingleton.getInstance(requireContext()).login_token
+            var token = MySingleton.getInstance().login_token
             val request: Call<ResponseDevice> = service.delete_device(deviceSerial.text.toString() ,"Bearer "+"${token}")//로그인 확인
             request.enqueue(object : Callback<ResponseDevice> {
                 override fun onResponse(
