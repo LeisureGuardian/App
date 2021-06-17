@@ -12,10 +12,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT     // 세로화면 고정
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 세로화면 고정
         Handler(Looper.getMainLooper()).postDelayed({ startActivity(
             Intent(this,
                 LoginActivity::class.java)
-        )},2000L)   // 2초 지연후 다음 화면으로 이동
+        )},1500L)   // 1.5초 지연후 다음 화면으로 이동
     }
 }

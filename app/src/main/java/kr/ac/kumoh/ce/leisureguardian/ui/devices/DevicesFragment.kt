@@ -1,4 +1,4 @@
-package kr.ac.kumoh.ce.leisureguardian.ui.list
+package kr.ac.kumoh.ce.leisureguardian.ui.devices
 
 import android.graphics.Color
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -15,9 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.ac.kumoh.ce.leisureguardian.R
 
-class ListFragment : Fragment() {
+class DevicesFragment : Fragment() {
 
-    private lateinit var listViewModel: ListViewModel
+    private lateinit var devicesViewModel: DevicesViewModel
     private val mAdapter = RecyclerAdapterDevices()
 
     override fun onCreateView(
@@ -25,8 +26,12 @@ class ListFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        listViewModel = ViewModelProvider(activity as AppCompatActivity).get(ListViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_list, container, false)
+        devicesViewModel = ViewModelProvider(activity as AppCompatActivity).get(DevicesViewModel::class.java)
+        devicesViewModel.list.observe(viewLifecycleOwner, {
+            mAdapter.notifyDataSetChanged()
+        })
+
+        val root = inflater.inflate(R.layout.fragment_devices, container, false)
         val recyclerView = root.findViewById<RecyclerView>(R.id.rvDevices)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -39,6 +44,7 @@ class ListFragment : Fragment() {
 
     inner class RecyclerAdapterDevices : RecyclerView.Adapter<RecyclerAdapterDevices.ViewHolder>() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val cardView: CardView = itemView.findViewById(R.id.cardView)
             val deviceImage: ImageView = itemView.findViewById(R.id.deviceImage)
             val deviceName: TextView = itemView.findViewById(R.id.deviceName)
             val batteryLevel: TextView = itemView.findViewById(R.id.batteryLevel)
@@ -46,21 +52,21 @@ class ListFragment : Fragment() {
             val accelMax: TextView = itemView.findViewById(R.id.accelMax)
             val heartRate: TextView = itemView.findViewById(R.id.heartRate)
         }
-        override fun getItemCount(): Int = listViewModel.getSize()
+        override fun getItemCount(): Int = devicesViewModel.getSize()
 
         override fun onBindViewHolder(holder: RecyclerAdapterDevices.ViewHolder, position: Int) {
-            if(listViewModel.getStatus(position).critical == "0") {
+            if(devicesViewModel.getStatus(position).critical == "0" && devicesViewModel.getStatus(position).button == "0") {
                 holder.deviceImage.setImageResource(R.drawable.device_green)
             }
             else {
-                holder.deviceName.setTextColor(Color.parseColor("#ff0000"))
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
                 holder.deviceImage.setImageResource(R.drawable.device_red)
             }
-            holder.deviceName.text = listViewModel.getStatus(position).deviceName
-            holder.batteryLevel.text = "배터리: " + listViewModel.getStatus(position).batteryLevel + "%"
-            holder.temp.text = "체온: " + listViewModel.getStatus(position).temp + "℃"
-            holder.accelMax.text = "가속도: " + listViewModel.getStatus(position).accelMax
-            holder.heartRate.text = "심박수: " + listViewModel.getStatus(position).heartRate
+            holder.deviceName.text = devicesViewModel.getStatus(position).deviceName
+            holder.batteryLevel.text = "배터리: " + devicesViewModel.getStatus(position).batteryLevel + "%"
+            holder.temp.text = "체온: " + devicesViewModel.getStatus(position).temp + "℃"
+            holder.accelMax.text = "가속도: " + devicesViewModel.getStatus(position).accelMax
+            holder.heartRate.text = "심박수: " + devicesViewModel.getStatus(position).heartRate
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):

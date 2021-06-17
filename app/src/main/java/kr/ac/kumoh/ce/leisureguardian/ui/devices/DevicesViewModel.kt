@@ -1,4 +1,4 @@
-package kr.ac.kumoh.ce.leisureguardian.ui.list
+package kr.ac.kumoh.ce.leisureguardian.ui.devices
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ListViewModel : ViewModel() {
+class DevicesViewModel : ViewModel() {
     val list = MutableLiveData<ArrayList<StatusData>>()
     var statusData = ArrayList<StatusData>()
     private val token: String?

@@ -52,7 +52,14 @@ class MapFragment : Fragment() {
             MarkerOptions()
                 .position(LatLng(mapViewModel.getStatus(i).latitude.toDouble(), mapViewModel.getStatus(i).longitude.toDouble()))
                 .title(mapViewModel.getStatus(i).deviceName)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                .icon(BitmapDescriptorFactory.defaultMarker(
+                    if(mapViewModel.getStatus(i).critical == "0" && mapViewModel.getStatus(i).button == "0") {
+                        BitmapDescriptorFactory.HUE_GREEN
+                    }
+                    else {
+                        BitmapDescriptorFactory.HUE_RED
+                    })
+                )
             )
         }
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(kumoh))
