@@ -2,6 +2,9 @@ package kr.ac.kumoh.ce.leisureguardian.ui.devices
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +22,7 @@ import kr.ac.kumoh.ce.leisureguardian.R
 class DevicesFragment : Fragment() {
 
     private lateinit var devicesViewModel: DevicesViewModel
-    private val mAdapter = RecyclerAdapterDevices()
+    private val mAdapter = RecyclerAdapter()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -28,6 +31,10 @@ class DevicesFragment : Fragment() {
     ): View? {
         devicesViewModel = ViewModelProvider(activity as AppCompatActivity).get(DevicesViewModel::class.java)
         devicesViewModel.list.observe(viewLifecycleOwner, {
+            Handler(Looper.getMainLooper()).postDelayed({
+                devicesViewModel.updateStatus()
+                Log.d("test-update", "device data updated")
+            },5000L)
             mAdapter.notifyDataSetChanged()
         })
 
@@ -42,7 +49,7 @@ class DevicesFragment : Fragment() {
         return root
     }
 
-    inner class RecyclerAdapterDevices : RecyclerView.Adapter<RecyclerAdapterDevices.ViewHolder>() {
+    inner class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val cardView: CardView = itemView.findViewById(R.id.cardView)
             val deviceImage: ImageView = itemView.findViewById(R.id.deviceImage)
@@ -54,13 +61,14 @@ class DevicesFragment : Fragment() {
         }
         override fun getItemCount(): Int = devicesViewModel.getSize()
 
-        override fun onBindViewHolder(holder: RecyclerAdapterDevices.ViewHolder, position: Int) {
+        override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
             if(devicesViewModel.getStatus(position).critical == "0" && devicesViewModel.getStatus(position).button == "0") {
                 holder.deviceImage.setImageResource(R.drawable.device_green)
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#ffffff"))
             }
             else {
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
                 holder.deviceImage.setImageResource(R.drawable.device_red)
+                holder.cardView.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
             }
             holder.deviceName.text = devicesViewModel.getStatus(position).deviceName
             holder.batteryLevel.text = "배터리: " + devicesViewModel.getStatus(position).batteryLevel + "%"
@@ -70,7 +78,7 @@ class DevicesFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-                RecyclerAdapterDevices.ViewHolder {
+                RecyclerAdapter.ViewHolder {
             val view = layoutInflater.inflate(R.layout.list_devices, parent, false)
             return ViewHolder(view)
         }

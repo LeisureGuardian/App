@@ -24,7 +24,7 @@ class DevicesViewModel : ViewModel() {
         updateStatus()
     }
 
-    private fun updateStatus() {
+    fun updateStatus() {
         val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val service = retrofit.create(RetrofitAPI::class.java)  // RetrofitAPI 사용
