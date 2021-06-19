@@ -32,15 +32,15 @@ class DevicesViewModel : ViewModel() {
         val request: Call<DeviceData<ArrayList<StatusData>>> = service.statusListGet("Bearer $token")
         request.enqueue(object :Callback<DeviceData<ArrayList<StatusData>>> {
             override fun onResponse(call: Call<DeviceData<ArrayList<StatusData>>>, response: Response<DeviceData<ArrayList<StatusData>>>) {
-                Log.d("test-List response", response.toString())
-                Log.d("test-List body", response.body().toString())
+                Log.d("test-Device response", response.toString())
+                Log.d("test-Device body", response.body().toString())
                 statusData.clear()
                 statusData = response.body()?.data?: ArrayList()
                 list.value = statusData
-                Log.d("test-List", list.value.toString())
+                Log.d("test-Device", list.value.toString())
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<StatusData>>>, t: Throwable) {
-                Log.d("test-error", t.toString())
+                Log.d("test-Device error", t.toString())
             }
         })
     }

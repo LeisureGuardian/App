@@ -38,14 +38,12 @@ class MapViewModel : ViewModel() {
                 statusData = response.body()?.data?: ArrayList()
                 list.value = statusData
                 Log.d("test-Map", list.value.toString())
+                Singleton.getInstance().deviceInfo.clear()
+                Singleton.getInstance().deviceInfo = statusData // 싱글톤 객체에 값 저장
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<StatusData>>>, t: Throwable) {
-                Log.d("test-error", t.toString())
+                Log.d("test-Map error", t.toString())
             }
         })
     }
-
-    fun getStatus(i: Int) = statusData[i]
-
-    fun getSize() = statusData.size
 }

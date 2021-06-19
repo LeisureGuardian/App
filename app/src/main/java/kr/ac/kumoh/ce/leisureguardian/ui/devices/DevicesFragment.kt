@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.ac.kumoh.ce.leisureguardian.R
 
 class DevicesFragment : Fragment() {
-
     private lateinit var devicesViewModel: DevicesViewModel
     private val mAdapter = RecyclerAdapter()
 
@@ -33,8 +32,8 @@ class DevicesFragment : Fragment() {
         devicesViewModel.list.observe(viewLifecycleOwner, {
             Handler(Looper.getMainLooper()).postDelayed({
                 devicesViewModel.updateStatus()
-                Log.d("test-update", "device data updated")
-            },5000L)
+                Log.d("test-Device update", "device data updated")
+            }, 5000L)
             mAdapter.notifyDataSetChanged()
         })
 
@@ -49,8 +48,8 @@ class DevicesFragment : Fragment() {
         return root
     }
 
-    inner class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
-        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.DevicesViewHolder>() {
+        inner class DevicesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val cardView: CardView = itemView.findViewById(R.id.cardView)
             val deviceImage: ImageView = itemView.findViewById(R.id.deviceImage)
             val deviceName: TextView = itemView.findViewById(R.id.deviceName)
@@ -61,26 +60,26 @@ class DevicesFragment : Fragment() {
         }
         override fun getItemCount(): Int = devicesViewModel.getSize()
 
-        override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
+        override fun onBindViewHolder(devicesHolder: RecyclerAdapter.DevicesViewHolder, position: Int) {
             if(devicesViewModel.getStatus(position).critical == "0" && devicesViewModel.getStatus(position).button == "0") {
-                holder.deviceImage.setImageResource(R.drawable.device_green)
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#ffffff"))
+                devicesHolder.deviceImage.setImageResource(R.drawable.device_green)
+                devicesHolder.cardView.setCardBackgroundColor(Color.parseColor("#ffffff"))
             }
             else {
-                holder.deviceImage.setImageResource(R.drawable.device_red)
-                holder.cardView.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
+                devicesHolder.deviceImage.setImageResource(R.drawable.device_red)
+                devicesHolder.cardView.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
             }
-            holder.deviceName.text = devicesViewModel.getStatus(position).deviceName
-            holder.batteryLevel.text = "배터리: " + devicesViewModel.getStatus(position).batteryLevel + "%"
-            holder.temp.text = "체온: " + devicesViewModel.getStatus(position).temp + "℃"
-            holder.accelMax.text = "가속도: " + devicesViewModel.getStatus(position).accelMax
-            holder.heartRate.text = "심박수: " + devicesViewModel.getStatus(position).heartRate
+            devicesHolder.deviceName.text = devicesViewModel.getStatus(position).deviceName
+            devicesHolder.batteryLevel.text = "배터리: " + devicesViewModel.getStatus(position).batteryLevel + "%"
+            devicesHolder.temp.text = "체온: " + devicesViewModel.getStatus(position).temp + "℃"
+            devicesHolder.accelMax.text = "가속도: " + devicesViewModel.getStatus(position).accelMax
+            devicesHolder.heartRate.text = "심박수: " + devicesViewModel.getStatus(position).heartRate
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):
-                RecyclerAdapter.ViewHolder {
+                RecyclerAdapter.DevicesViewHolder {
             val view = layoutInflater.inflate(R.layout.list_devices, parent, false)
-            return ViewHolder(view)
+            return DevicesViewHolder(view)
         }
     }
 }

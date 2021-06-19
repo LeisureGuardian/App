@@ -1,5 +1,8 @@
 package kr.ac.kumoh.ce.leisureguardian
 
+import com.google.android.gms.maps.model.Marker
+import kr.ac.kumoh.ce.leisureguardian.data.StatusData
+
 class Singleton private constructor() {
     companion object {
         private var INSTANCE: Singleton ?= null
@@ -11,4 +14,6 @@ class Singleton private constructor() {
             }
     }
     var loginToken: String? = null
+    var deviceInfo = ArrayList<StatusData>()
+    var markerList = ArrayList<Marker>()
 }
