@@ -1,7 +1,7 @@
 package kr.ac.kumoh.s20160250.lg.ui.maps
 
 import android.util.Log
-import androidx.lifecycle.LiveData
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.ac.kumoh.s20160250.lg.MySingleton
@@ -39,6 +39,8 @@ class MapsViewModel : ViewModel() {
                 statusdata= response.body()?.data!!
                 list.value=statusdata
                 Log.d("test/map/list",list.value.toString())
+                MySingleton.getInstance().deviceinfo.clear()
+                MySingleton.getInstance().deviceinfo = statusdata // 싱글톤 객체에 값저장
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<StatusData>>>, t: Throwable) {
                 Log.d("test/map/error",t.toString())

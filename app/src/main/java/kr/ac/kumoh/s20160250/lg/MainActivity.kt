@@ -15,6 +15,6 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({ startActivity(
             Intent(this,
             LoginActivity::class.java)
-        )},2000L) //2초 지연후 다음화면으로 이동
+        )},1500L) //1.5초 지연후 다음화면으로 이동
     }
 }

@@ -1,19 +1,15 @@
 package kr.ac.kumoh.s20160250.lg
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_signup.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kr.ac.kumoh.s20160250.lg.data.ResponseData
 import kr.ac.kumoh.s20160250.lg.data.RetrofitAPI
 import kr.ac.kumoh.s20160250.lg.data.SignUpData
-import kr.ac.kumoh.s20160250.lg.data.SignUpResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
