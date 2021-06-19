@@ -19,16 +19,10 @@ class LoginActivity : AppCompatActivity()  {
     companion object{
             const val token= "token"
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-
-        //Toast.makeText(this,password.text,Toast.LENGTH_SHORT).show()
         loginbutton.setOnClickListener{
-            //Toast.makeText(this,password.text,Toast.LENGTH_SHORT).show()
-            //loginbutton.isClickable=false //클릭불가ㄴ상태
             val loginData = LoginData(useremail.text.toString(),password.text.toString())
             Log.d("username",loginData.email)
             Log.d("password",loginData.password)

@@ -21,7 +21,7 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
         signupbutton2.setOnClickListener {
-            var signupdata=SignUpData(organization.text.toString(),newName.text.toString(),newEmail.text.toString(),newPassword.text.toString())
+            var signupdata = SignUpData(organization.text.toString(),newName.text.toString(),newEmail.text.toString(),newPassword.text.toString())
             Log.d("check",signupdata.toString())
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://mmyu.synology.me:8000")
@@ -52,7 +52,7 @@ class SignupActivity : AppCompatActivity() {
                             {
                                 val text: CharSequence ="계정등록 실패"
                                 Toast.makeText(this@SignupActivity,text,Toast.LENGTH_SHORT).show()
-                                }
+                            }
                     }
                     else
                     {
@@ -60,9 +60,7 @@ class SignupActivity : AppCompatActivity() {
                         Log.d("response",response.body().toString()) //에러 정보 확인
                         Toast.makeText(this@SignupActivity,"입력된 정보를 확인하시오",Toast.LENGTH_SHORT).show()
                     }
-
                 }
-
                     override fun onFailure(
                         call: Call<ResponseData>,
                         t: Throwable
@@ -71,7 +69,6 @@ class SignupActivity : AppCompatActivity() {
                         Toast.makeText(this@SignupActivity,"rest 요청 실패",Toast.LENGTH_SHORT).show()
                     }
                 })
-
         }
     }
 

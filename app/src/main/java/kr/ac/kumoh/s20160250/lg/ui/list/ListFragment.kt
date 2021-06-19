@@ -52,14 +52,14 @@ class ListFragment : Fragment() {
         return root
     }
     inner class device_adapter : RecyclerView.Adapter<device_adapter.ViewHolder>(){
-        inner class ViewHolder(itemView:View) :RecyclerView.ViewHolder(itemView){
+        inner class ViewHolder(itemView:View): RecyclerView.ViewHolder(itemView){
             val devicename: TextView = itemView.findViewById<TextView>(R.id.deviceName)
             val temp: TextView = itemView.findViewById<TextView>(R.id.temp)
             val image: ImageView = itemView.findViewById<ImageView>(R.id.deviceImage)
-            val accelerate :TextView =itemView.findViewById<TextView>(R.id.accelMax)
-            val Heartrate :TextView =itemView.findViewById<TextView>(R.id.heartRate)
-            val battery :TextView =itemView.findViewById<TextView>(R.id.batteryLevel)
-            val cardview : CardView =itemView.findViewById<CardView>(R.id.cardview)
+            val accelerate :TextView = itemView.findViewById<TextView>(R.id.accelMax)
+            val Heartrate :TextView = itemView.findViewById<TextView>(R.id.heartRate)
+            val battery :TextView = itemView.findViewById<TextView>(R.id.batteryLevel)
+            val cardview : CardView = itemView.findViewById<CardView>(R.id.cardview)
 
         }
         override fun getItemCount(): Int {

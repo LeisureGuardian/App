@@ -28,7 +28,7 @@ import kr.ac.kumoh.s20160250.lg.ui.list.ListFragment
 
 class MapsFragment : Fragment() {
 
-
+    private var mapFragment: SupportMapFragment ?= null
     private lateinit var mapviewmodel: MapsViewModel
     private val kumoh = LatLng(36.1455, 128.3925)
     private var callback = OnMapReadyCallback { googleMap ->
@@ -68,15 +68,11 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         mapviewmodel = ViewModelProvider(activity as AppCompatActivity).get(MapsViewModel::class.java)
         mapviewmodel.list.observe(viewLifecycleOwner, Observer<ArrayList<StatusData>> {
             Handler(Looper.getMainLooper()).postDelayed({
-
                 mapviewmodel.update_status()
                 callback= OnMapReadyCallback { googleMap ->
-
-
                     for(i in 0 until(MySingleton.getInstance().markerList.size)) {
                         MySingleton.getInstance().markerList[i].remove()
                     }
@@ -98,27 +94,20 @@ class MapsFragment : Fragment() {
                                 )
                         ))
                     }
-
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(kumoh))
-                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                     googleMap.setPadding(0, 0, 0, 120)
                     googleMap.uiSettings.isZoomControlsEnabled = true
                     googleMap.uiSettings.isMapToolbarEnabled = false
                 }
-                val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
                 mapFragment?.getMapAsync(callback)
             },5000L)
         })
         Log.d("test/mapfragment",mapviewmodel.list.value.toString())
         return inflater.inflate(R.layout.fragment_maps, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-
+        mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
     }
 }

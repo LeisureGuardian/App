@@ -1,8 +1,6 @@
 package kr.ac.kumoh.s20160250.lg
 
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import kr.ac.kumoh.s20160250.lg.data.DeviceInfo
 import kr.ac.kumoh.s20160250.lg.data.StatusData
 
 
