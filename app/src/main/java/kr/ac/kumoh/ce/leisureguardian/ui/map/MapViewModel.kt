@@ -39,7 +39,7 @@ class MapViewModel : ViewModel() {
                 list.value = statusData
                 Log.d("test-Map", list.value.toString())
                 Singleton.getInstance().deviceInfo.clear()
-                Singleton.getInstance().deviceInfo = statusData // 싱글톤 객체에 값 저장
+                Singleton.getInstance().deviceInfo = statusData
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<StatusData>>>, t: Throwable) {
                 Log.d("test-Map error", t.toString())

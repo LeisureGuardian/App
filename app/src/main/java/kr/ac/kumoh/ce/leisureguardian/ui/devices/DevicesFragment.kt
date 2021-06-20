@@ -58,6 +58,7 @@ class DevicesFragment : Fragment() {
             val accelMax: TextView = itemView.findViewById(R.id.accelMax)
             val heartRate: TextView = itemView.findViewById(R.id.heartRate)
         }
+
         override fun getItemCount(): Int = devicesViewModel.getSize()
 
         override fun onBindViewHolder(devicesHolder: RecyclerAdapter.DevicesViewHolder, position: Int) {
@@ -65,9 +66,17 @@ class DevicesFragment : Fragment() {
                 devicesHolder.deviceImage.setImageResource(R.drawable.device_green)
                 devicesHolder.cardView.setCardBackgroundColor(Color.parseColor("#ffffff"))
             }
-            else {
+            else if(devicesViewModel.getStatus(position).critical == "1") {
+                devicesHolder.deviceImage.setImageResource(R.drawable.device_black)
+                devicesHolder.cardView.setCardBackgroundColor(Color.parseColor("#bebebe"))
+            }
+            else if(devicesViewModel.getStatus(position).critical == "2" || devicesViewModel.getStatus(position).button == "1"){
                 devicesHolder.deviceImage.setImageResource(R.drawable.device_red)
                 devicesHolder.cardView.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
+            }
+            else if(devicesViewModel.getStatus(position).critical == "3") {
+                devicesHolder.deviceImage.setImageResource(R.drawable.device_yellow)
+                devicesHolder.cardView.setCardBackgroundColor(Color.parseColor("#eedd82"))
             }
             devicesHolder.deviceName.text = devicesViewModel.getStatus(position).deviceName
             devicesHolder.batteryLevel.text = "배터리: " + devicesViewModel.getStatus(position).batteryLevel + "%"

@@ -29,22 +29,40 @@ class MapFragment : Fragment() {
         }
         Singleton.getInstance().markerList.clear()
         for (i in 0 until (Singleton.getInstance().deviceInfo.size)) {
-            Singleton.getInstance().markerList.add(googleMap.addMarker(
-                MarkerOptions()
-                    .position(LatLng(
-                        Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
-                        Singleton.getInstance().deviceInfo[i].longitude.toDouble()
-                    ))
-                    .title(Singleton.getInstance().deviceInfo[i].deviceName)
-                    .icon(BitmapDescriptorFactory.defaultMarker(
-                        if(Singleton.getInstance().deviceInfo[i].critical == "0" && Singleton.getInstance().deviceInfo[i].button == "0") {
-                            BitmapDescriptorFactory.HUE_GREEN
-                        } else {
-                            BitmapDescriptorFactory.HUE_RED
-                        }
-                    ))
-            ))
-        }
+            if(Singleton.getInstance().deviceInfo[i].critical == "1") {
+                Singleton.getInstance().markerList.add(googleMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(
+                            Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                            Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                        ))
+                        .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_gray)
+                        ))
+                )
+            }
+            else {
+                Singleton.getInstance().markerList.add(googleMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(
+                            Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                            Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                        ))
+                        .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                        .icon(BitmapDescriptorFactory.defaultMarker(
+                            if(Singleton.getInstance().deviceInfo[i].critical == "2" || Singleton.getInstance().deviceInfo[i].button == "1") {
+                                BitmapDescriptorFactory.HUE_RED
+                            }
+                            else if(Singleton.getInstance().deviceInfo[i].critical == "3") {
+                                BitmapDescriptorFactory.HUE_YELLOW
+                            }
+                            else {
+                                BitmapDescriptorFactory.HUE_GREEN
+                            }
+                        ))
+                ))
+            }
+            }
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(kumoh))
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
         googleMap.setPadding(0, 0, 0, 120)
@@ -67,21 +85,39 @@ class MapFragment : Fragment() {
                     }
                     Singleton.getInstance().markerList.clear()
                     for (i in 0 until (Singleton.getInstance().deviceInfo.size)) {
-                        Singleton.getInstance().markerList.add(googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(
-                                    Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
-                                    Singleton.getInstance().deviceInfo[i].longitude.toDouble()
-                                ))
-                                .title(Singleton.getInstance().deviceInfo[i].deviceName)
-                                .icon(BitmapDescriptorFactory.defaultMarker(
-                                    if(Singleton.getInstance().deviceInfo[i].critical == "0" && Singleton.getInstance().deviceInfo[i].button == "0") {
-                                        BitmapDescriptorFactory.HUE_GREEN
-                                    } else {
-                                        BitmapDescriptorFactory.HUE_RED
-                                    }
-                                ))
-                        ))
+                        if(Singleton.getInstance().deviceInfo[i].critical == "1") {
+                            Singleton.getInstance().markerList.add(googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(LatLng(
+                                        Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                                        Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                                    ))
+                                    .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_gray)
+                                    ))
+                            )
+                        }
+                        else {
+                            Singleton.getInstance().markerList.add(googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(LatLng(
+                                        Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                                        Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                                    ))
+                                    .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(
+                                        if(Singleton.getInstance().deviceInfo[i].critical == "2" || Singleton.getInstance().deviceInfo[i].button == "1") {
+                                            BitmapDescriptorFactory.HUE_RED
+                                        }
+                                        else if(Singleton.getInstance().deviceInfo[i].critical == "3") {
+                                            BitmapDescriptorFactory.HUE_YELLOW
+                                        }
+                                        else {
+                                            BitmapDescriptorFactory.HUE_GREEN
+                                        }
+                                    ))
+                            ))
+                        }
                     }
                 }
                 mapFragment?.getMapAsync(callback)

@@ -54,7 +54,7 @@ class SignupActivity : AppCompatActivity() {
                         Log.d("test-Signup data", responseData.toString())
 
                         if(responseData != null) {
-                            Toast.makeText(this@SignupActivity, "계정이 성공적으로 등록됨", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@SignupActivity, "계정 등록 성공", Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@SignupActivity, LoginActivity::class.java)
                             startActivity(intent)
                         }
