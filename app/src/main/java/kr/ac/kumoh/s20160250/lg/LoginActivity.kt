@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity()  {
 
                         if(responseData?.access_token!=null){
                             val intent= Intent(this@LoginActivity,TabActivity::class.java)
-                                MySingleton.getInstance().login_token=responseData.access_token
+                                Singleton.getInstance().login_token=responseData.access_token
                                 startActivity(intent)
                             }
                         else{

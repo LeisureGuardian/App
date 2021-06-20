@@ -75,13 +75,21 @@ class ListFragment : Fragment() {
         override fun onBindViewHolder(holder: device_adapter.ViewHolder, position: Int) {
             holder.devicename.text = listViewModel.getStatus(position).deviceName
             holder.temp.text = listViewModel.getStatus(position).temp+"℃"
-            if(listViewModel.getStatus(position).critical=="0" && listViewModel.getStatus(position).button=="0"){
+            if(listViewModel.getStatus(position).critical == "0" && listViewModel.getStatus(position).button == "0") {
                 holder.image.setImageResource(R.drawable.device_green)
                 holder.cardview.setCardBackgroundColor(Color.parseColor("#ffffff"))
             }
-            else{
+            else if(listViewModel.getStatus(position).critical == "1") {
+                holder.image.setImageResource(R.drawable.device_black)
+                holder.cardview.setCardBackgroundColor(Color.parseColor("#bebebe"))
+            }
+            else if(listViewModel.getStatus(position).critical == "2" || listViewModel.getStatus(position).button == "1"){
                 holder.image.setImageResource(R.drawable.device_red)
                 holder.cardview.setCardBackgroundColor(Color.parseColor("#ffe4e1"))
+            }
+            else if(listViewModel.getStatus(position).critical == "3") {
+                holder.image.setImageResource(R.drawable.device_yellow)
+                holder.cardview.setCardBackgroundColor(Color.parseColor("#eedd82"))
             }
             holder.accelerate.text = "가속도: "+ listViewModel.getStatus(position).accelMax
             holder.Heartrate.text = "심박: "+ listViewModel.getStatus(position).heartRate

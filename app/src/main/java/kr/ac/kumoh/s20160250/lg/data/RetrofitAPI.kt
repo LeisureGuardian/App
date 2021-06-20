@@ -24,9 +24,6 @@ interface RetrofitAPI {
     @Header("Authorization") token: String?,
     @Body deviceInfo: DeviceInfo) : Call<ResponseData>
 
-    @GET("/device")
-    fun statusGet(
-        @Header("Authorization") token: String?): Call<DeviceData<ArrayList<Device>>>
     @GET("/deviceData")
     fun statusListGet(
         @Header("Authorization") token: String?): Call<DeviceData<ArrayList<StatusData>>>

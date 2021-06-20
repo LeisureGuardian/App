@@ -4,7 +4,7 @@ import android.util.Log
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kr.ac.kumoh.s20160250.lg.MySingleton
+import kr.ac.kumoh.s20160250.lg.Singleton
 import kr.ac.kumoh.s20160250.lg.data.DeviceData
 import kr.ac.kumoh.s20160250.lg.data.RetrofitAPI
 import kr.ac.kumoh.s20160250.lg.data.StatusData
@@ -22,7 +22,7 @@ class MapsViewModel : ViewModel() {
 
     init {
         list.value= statusdata
-        token = MySingleton.getInstance().login_token
+        token = Singleton.getInstance().login_token
         update_status()
     }
     fun update_status() {
@@ -39,8 +39,8 @@ class MapsViewModel : ViewModel() {
                 statusdata= response.body()?.data!!
                 list.value=statusdata
                 Log.d("test/map/list",list.value.toString())
-                MySingleton.getInstance().deviceinfo.clear()
-                MySingleton.getInstance().deviceinfo = statusdata // 싱글톤 객체에 값저장
+                Singleton.getInstance().deviceInfo.clear()
+                Singleton.getInstance().deviceInfo = statusdata // 싱글톤 객체에 값저장
             }
             override fun onFailure(call: Call<DeviceData<ArrayList<StatusData>>>, t: Throwable) {
                 Log.d("test/map/error",t.toString())

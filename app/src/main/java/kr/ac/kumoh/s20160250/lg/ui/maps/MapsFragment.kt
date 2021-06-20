@@ -13,17 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kr.ac.kumoh.s20160250.lg.MySingleton
+import kr.ac.kumoh.s20160250.lg.Singleton
 import kr.ac.kumoh.s20160250.lg.data.StatusData
-import kr.ac.kumoh.s20160250.lg.ui.list.ListFragment
 
 
 class MapsFragment : Fragment() {
@@ -34,26 +31,45 @@ class MapsFragment : Fragment() {
     private var callback = OnMapReadyCallback { googleMap ->
 
 
-        for(i in 0 until(MySingleton.getInstance().markerList.size)) {
-            MySingleton.getInstance().markerList[i].remove()
+        for(i in 0 until(Singleton.getInstance().markerList.size)) {
+            Singleton.getInstance().markerList[i].remove()
         }
-        MySingleton.getInstance().markerList.clear()
+        Singleton.getInstance().markerList.clear()
 
-        for(i in 0 until(MySingleton.getInstance().deviceinfo.size)){
-
-            MySingleton.getInstance().markerList.add(googleMap.addMarker(
-                MarkerOptions()
-                    .position(LatLng(MySingleton.getInstance().deviceinfo[i].latitude.toDouble(), MySingleton.getInstance().deviceinfo[i].longitude.toDouble()))
-                    .title(MySingleton.getInstance().deviceinfo[i].deviceName)
-                    .icon(BitmapDescriptorFactory.defaultMarker(
-                        if(MySingleton.getInstance().deviceinfo[i].critical == "0" && MySingleton.getInstance().deviceinfo[i].button == "0") {
-                            BitmapDescriptorFactory.HUE_GREEN
-                        }
-                        else {
-                            BitmapDescriptorFactory.HUE_ROSE
-                        })
-                    )
-            ))
+        for(i in 0 until(Singleton.getInstance().deviceInfo.size)){
+            if(Singleton.getInstance().deviceInfo[i].critical == "1") {
+                Singleton.getInstance().markerList.add(googleMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(
+                            Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                            Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                        ))
+                        .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_gray)
+                        ))
+                )
+            }
+            else {
+                Singleton.getInstance().markerList.add(googleMap.addMarker(
+                    MarkerOptions()
+                        .position(LatLng(
+                            Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                            Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                        ))
+                        .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                        .icon(BitmapDescriptorFactory.defaultMarker(
+                            if(Singleton.getInstance().deviceInfo[i].critical == "2" || Singleton.getInstance().deviceInfo[i].button == "1") {
+                                BitmapDescriptorFactory.HUE_RED
+                            }
+                            else if(Singleton.getInstance().deviceInfo[i].critical == "3") {
+                                BitmapDescriptorFactory.HUE_YELLOW
+                            }
+                            else {
+                                BitmapDescriptorFactory.HUE_GREEN
+                            }
+                        ))
+                ))
+            }
         }
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(kumoh))
@@ -73,26 +89,45 @@ class MapsFragment : Fragment() {
             Handler(Looper.getMainLooper()).postDelayed({
                 mapviewmodel.update_status()
                 callback= OnMapReadyCallback { googleMap ->
-                    for(i in 0 until(MySingleton.getInstance().markerList.size)) {
-                        MySingleton.getInstance().markerList[i].remove()
+                    for(i in 0 until(Singleton.getInstance().markerList.size)) {
+                        Singleton.getInstance().markerList[i].remove()
                     }
-                    MySingleton.getInstance().markerList.clear()
+                    Singleton.getInstance().markerList.clear()
 
-                    for(i in 0 until(MySingleton.getInstance().deviceinfo.size)){
-
-                        MySingleton.getInstance().markerList.add(googleMap.addMarker(
-                            MarkerOptions()
-                                .position(LatLng(MySingleton.getInstance().deviceinfo[i].latitude.toDouble(), MySingleton.getInstance().deviceinfo[i].longitude.toDouble()))
-                                .title(MySingleton.getInstance().deviceinfo[i].deviceName)
-                                .icon(BitmapDescriptorFactory.defaultMarker(
-                                    if(MySingleton.getInstance().deviceinfo[i].critical == "0" && MySingleton.getInstance().deviceinfo[i].button == "0") {
-                                        BitmapDescriptorFactory.HUE_GREEN
-                                    }
-                                    else {
-                                        BitmapDescriptorFactory.HUE_ROSE
-                                    })
-                                )
-                        ))
+                    for(i in 0 until(Singleton.getInstance().deviceInfo.size)){
+                        if(Singleton.getInstance().deviceInfo[i].critical == "1") {
+                            Singleton.getInstance().markerList.add(googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(LatLng(
+                                        Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                                        Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                                    ))
+                                    .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_gray)
+                                    ))
+                            )
+                        }
+                        else {
+                            Singleton.getInstance().markerList.add(googleMap.addMarker(
+                                MarkerOptions()
+                                    .position(LatLng(
+                                        Singleton.getInstance().deviceInfo[i].latitude.toDouble(),
+                                        Singleton.getInstance().deviceInfo[i].longitude.toDouble()
+                                    ))
+                                    .title(Singleton.getInstance().deviceInfo[i].deviceName)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(
+                                        if(Singleton.getInstance().deviceInfo[i].critical == "2" || Singleton.getInstance().deviceInfo[i].button == "1") {
+                                            BitmapDescriptorFactory.HUE_RED
+                                        }
+                                        else if(Singleton.getInstance().deviceInfo[i].critical == "3") {
+                                            BitmapDescriptorFactory.HUE_YELLOW
+                                        }
+                                        else {
+                                            BitmapDescriptorFactory.HUE_GREEN
+                                        }
+                                    ))
+                            ))
+                        }
                     }
                     googleMap.setPadding(0, 0, 0, 120)
                     googleMap.uiSettings.isZoomControlsEnabled = true

@@ -4,8 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.RecyclerView
-import kr.ac.kumoh.s20160250.lg.MySingleton
+import kr.ac.kumoh.s20160250.lg.Singleton
 import kr.ac.kumoh.s20160250.lg.data.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +20,7 @@ class ListViewModel (application: Application) : AndroidViewModel(application) {
 
     init {
         list.value= statusdata
-        token = MySingleton.getInstance().login_token
+        token = Singleton.getInstance().login_token
         update_status()
     }
     fun update_status() {

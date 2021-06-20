@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_management.*
 import kotlinx.android.synthetic.main.fragment_management.view.*
-import kr.ac.kumoh.s20160250.lg.MySingleton
+import kr.ac.kumoh.s20160250.lg.Singleton
 import kr.ac.kumoh.s20160250.lg.R
 import kr.ac.kumoh.s20160250.lg.data.DeviceInfo
 import kr.ac.kumoh.s20160250.lg.data.ResponseData
@@ -47,7 +47,7 @@ class ManagementFragment : Fragment() {
 
             var deviceinfo=DeviceInfo(deviceSerial.text.toString(),deviceName.text.toString())
             Log.d("deviceinfo",deviceinfo.toString())
-            var token = MySingleton.getInstance().login_token
+            var token = Singleton.getInstance().login_token
             val request: Call<ResponseData> = service.add_device("Bearer "+"${token}",deviceinfo)
             request.enqueue(object : Callback<ResponseData> {
                 override fun onResponse(
@@ -75,7 +75,7 @@ class ManagementFragment : Fragment() {
             val retrofit: Retrofit = Retrofit.Builder().baseUrl("http://mmyu.synology.me:8000").
             addConverterFactory(GsonConverterFactory.create()).build()
             val service=retrofit.create(RetrofitAPI::class.java) //restrofit api 사용
-            var token = MySingleton.getInstance().login_token
+            var token = Singleton.getInstance().login_token
             val request: Call<ResponseDevice> = service.delete_device(deviceSerial.text.toString() ,"Bearer "+"${token}")//로그인 확인
             request.enqueue(object : Callback<ResponseDevice> {
                 override fun onResponse(
